@@ -1,7 +1,7 @@
 /*
     Name:
     ID:
-    TITLE: Banker's Algorithm
+    TITLE: Deadlock Detection Algorithm
 
 */
 
