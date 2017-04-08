@@ -14,15 +14,23 @@ using namespace std;
 int No_Of_Pages,No_Of_Frame;
 int Pages[MAX],Frame[MAX],FrameInfo[MAX];
 
-int VictimFrame(){
-    int tm=FrameInfo[0];
-    int indx=0;
-    for(int i=1;i<No_Of_Frame;i++)
-    if(tm>FrameInfo[i]){
-        indx=i;
-        tm=FrameInfo[i];
+int VictimFrame(int n){
+    int index=0;
+    int pos=0;
+    for(int i=0;i<No_Of_Frame;i++){
+            int tm=-1;
+        for(int j=n;j<No_Of_Pages;j++)
+            if(Frame[i]==Pages[j]){
+            tm=j;
+            break;
+        }
+        if(tm==-1) return i;
+        if(tm>pos) {
+            index=i;
+            pos=tm;
+        }
     }
-    return indx;
+    return index;
 }
 
 bool IsPageAlreadyIn(int tm){
@@ -55,7 +63,7 @@ void Output(){
              for(int i=0;i<No_Of_Frame;i++) pf("%2d ",Frame[i]);
              pf("\n");
         }else{
-            int tm=VictimFrame();
+            int tm=VictimFrame((i+1));
             Frame[tm]=Pages[i];
             FrameInfo[tm]=(i+1);
             Fault++;
