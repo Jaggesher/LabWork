@@ -1,7 +1,7 @@
 /*
     Name:
     ID:
-    TITLE: Deadlock Detection Algorithm
+    TITLE: DeadLock Detection Algorithm
 
 */
 
@@ -19,6 +19,7 @@ int Allocated[MAX][MAX];
 int Need[MAX][MAX];
 int Claim[MAX][MAX];
 bitset<MAX>Done;
+vector<int>Sequence;
 
 void Cal_Available(){
     for(int j=0;j<No_Of_Resources;j++){
@@ -43,6 +44,7 @@ bool Cal_Is_Safe(){
         for(int i=0;i<No_Of_Process;i++){
             if(Done[i] && Is_It_Possible(i)){
                 for(int j=0;j<No_Of_Resources;j++) Available[j]+=Allocated[i][j];
+                Sequence.pb(i+1);
                 Done[i]=false;
                 flag=true;
                 break;
@@ -100,10 +102,15 @@ void Output(){
     for(int i=0;i<No_Of_Resources;i++) pf(" %d",Available[i]);
 
     if(Cal_Is_Safe()){
-        pf("\n\nThere is a Safe Sequence No Deadlock: ");
+        pf("\n\nThere is a Safe Sequence & the Sequence is: ");
+        for(int i=0;i<No_Of_Process;i++) pf("P%d ",Sequence[i]);
+        pf("\n\n");
     }
     else{
-        pf("\n\nThere Is No Safe Sequence(Deadlock)\n\n");
+        pf("\n\nThere Is No Safe Sequence(Deadlock)\n And The Blocked Process are: ");
+        for(int i=0;i<No_Of_Process;i++)
+            if(Done[i]) pf("P%d ",i);
+        pf("\n\n");
     }
     return;
 }
@@ -113,3 +120,26 @@ int main(){
     Output();
     return 0;
 }
+/*
+SAMPLE INPUT1:
+3
+5
+5
+5
+2
+2 2 2
+1 1 1
+4 4 4
+3 3 3
+
+SAMPLE INPUT2:
+3
+5
+5
+5
+2
+4 2 2
+1 1 1
+5 5 4
+3 3 3
+*/
