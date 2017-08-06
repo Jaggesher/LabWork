@@ -7,6 +7,7 @@ char FileName[100]="RandomNumber.text";
 
 void  LCM(int Mod,int N)
 {
+     pf("\n\n--------LCM-----\n\n");
     FILE *fp;
     int a,c,x0,Temp;
     pf("Enter The Multiplier=");
@@ -22,11 +23,13 @@ void  LCM(int Mod,int N)
         x0=Temp;
     }
     fclose(fp);
+    pf("Number Generated\n");
     return;
 }
 
 void DefaultRandom(int Mod,int N)
 {
+    pf("\n\n--------Default RAND-----\n\n");
     FILE *fp;
     srand((unsigned)time(0));
     fp=fopen(FileName,"w");
@@ -34,11 +37,13 @@ void DefaultRandom(int Mod,int N)
         fprintf(fp,"%d\n",(rand()%Mod));
     }
     fclose(fp);
+    pf("Number Generated\n");
     return;
 }
 
 void ChaiSqureTest(int Mod,int N)
 {
+    pf("\n\n--------Chai Squre Test-----\n\n");
     int cls,Range,Number,Expected;
     double GivenChai[2],Observed[100],ObserveChai=0;
     FILE *fp;
@@ -78,6 +83,7 @@ void ChaiSqureTest(int Mod,int N)
 
 void RunTEST(int Mod,int N)
 {
+    pf("\n\n--------Run Test-----\n\n");
     int RunUp=0,RunDown=0,Run=0,Number,Tmp;
     double Mean,Variance,Z0;
     bool flag,flagTm;
@@ -115,7 +121,7 @@ void RunTEST(int Mod,int N)
     Variance=(double)((16*N)-29)/(double)90;
     Z0=((double)Run-Mean)/sqrt(Variance);
 
-    pf("\n\nTotal Runs Up=%d\n",RunUp);
+    pf("Total Runs Up=%d\n",RunUp);
     pf("Total Runs Down=%d\n",RunDown);
     pf("Total Runs=%d\n",Run);
     pf("Means=%.4lf\n",Mean);
@@ -126,7 +132,8 @@ void RunTEST(int Mod,int N)
 
 void PokerTEST(int Mod,int N)
 {
-    pf("\n\nUNCOMPLETE 404 ERR\n\n");
+    pf("\n\n--------Pokers Test-----\n\n");
+    pf("UNCOMPLETE 404 ERR\n\n");
     return;
 }
 
@@ -139,10 +146,11 @@ int main()
     sf("%d",&Mod);
     pf("Choose The Method For Random Number Generate.\n");
     pf("a.press 1 for LCM\n");
-    pf("b.press 2 for Built In Rand Function");
-    char ch=getch();
-    if(ch=='1')LCM(Mod,Number);
-    else if(ch=='2')DefaultRandom(Mod,Number);
+    pf("b.press 2 for Built In Rand Function\n");
+    int choise;
+    sf("%d",&choise);
+    if(choise==1)LCM(Mod,Number);
+    else if(choise==2)DefaultRandom(Mod,Number);
     else pf("INVALID");
 
     ChaiSqureTest(Mod,Number);
