@@ -132,8 +132,53 @@ void RunTEST(int Mod,int N)
 
 void PokerTEST(int Mod,int N)
 {
-    pf("\n\n--------Pokers Test-----\n\n");
-    pf("UNCOMPLETE 404 ERR\n\n");
+    pf("\n\n--------Pokers Test-----\n");
+
+    int AllDif=0,TwoSame=0,AllSame=0,Number,a,b,c;
+    double ChaiSqure, GivenChai[2];
+    FILE *fp;
+    fp=fopen(FileName,"r");
+
+    for(int i=0;i<N;i++)
+    {
+        fscanf(fp,"%d",&Number);
+        a=Number%10;
+        Number/=10;
+        b=Number%10;
+        Number/=10;
+        c=Number;
+        if(a==b && b==c && c==a) AllSame++; //All Same Observed.
+        else if(a==b || b==c || a==c) TwoSame++; //Any two Same Observed.
+        else AllDif++; //All Different observed.
+    }
+    fclose(fp);
+
+    a=(double)N * .72; //All different Expected
+    b=(double)N * .27;//Any Two Same but not all
+    c=N-(a+b); //All Same
+
+    pf("\nObserved All Digits Different Numbers= %d\n", AllDif);
+    pf("Observed All Digits Same Numbers= %d\n", AllSame);
+    pf("Observed Two Digits Same Numbers= %d\n",TwoSame);
+
+    pf("\nExpected All Digits Different Numbers= %d\n", a);
+    pf("Expected All Digits Same Numbers= %d\n", c);
+    pf("Expected Two Digits Same Numbers= %d\n", b);
+
+    ChaiSqure= (pow((double)(a-AllDif),2)) / (double) a;
+    ChaiSqure+= (pow((double)(b-TwoSame),2)) / (double) b;
+    ChaiSqure+= (pow((double)(c-AllSame),2)) / (double) c;
+
+    pf("\nObserved ChaiSqure Value=%.4lf\n",ChaiSqure);
+
+    pf("Enter Chai Table Value for DOF(2)\nmin=");
+    sf("%lf",&GivenChai[0]);
+    pf("max=");
+    sf("%lf",&GivenChai[1]);
+    if(GivenChai[0]<= ChaiSqure && GivenChai[1]>= ChaiSqure)
+         pf("TEST PASSED");
+    else pf("TEST FAIl");
+
     return;
 }
 
@@ -156,5 +201,6 @@ int main()
     ChaiSqureTest(Mod,Number);
     RunTEST(Mod,Number);
     PokerTEST(Mod,Number);
+
     return 0;
 }
