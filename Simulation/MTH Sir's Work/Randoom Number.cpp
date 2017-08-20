@@ -81,9 +81,9 @@ void ChaiSqureTest(int Mod,int N)
     return;
 }
 
-void RunTEST(int Mod,int N)
+void RunUpDownTEST(int Mod,int N)
 {
-    pf("\n\n--------Run Test-----\n\n");
+    pf("\n\n--------Run Up Down TEST-----\n\n");
     int RunUp=0,RunDown=0,Run=0,Number,Tmp;
     double Mean,Variance,Z0;
     bool flag,flagTm;
@@ -130,6 +130,80 @@ void RunTEST(int Mod,int N)
     return;
 }
 
+void RunTEST(int Mod,int N){
+    pf("\n\n--------Run Above/Below TEST-----\n");
+
+    pf("\n\n--- INCOMPLETE---\n\n");
+    /*int Number;
+    FILE *fp;
+    fp=fopen(FileName,"r");
+
+    for(int i=0;i<N;i++)
+    {
+        fscanf(fp,"%d",&Number);
+    }
+    fclose(fp); */
+
+    return;
+}
+
+
+void RunAboveBelowTEST(int Mod,int N){
+    pf("\n\n--------Run Above/Below TEST-----\n");
+    int Number,ObjAbove=0,Objbelow=0,Mean,Run=0;
+    double alpha,Zalpha,calMean,CalVeri,Z0;
+    bool flag;
+    FILE *fp;
+    fp=fopen(FileName,"r");
+    Mean=((Mod-1)/2);
+    fscanf(fp,"%d",&Number);
+
+    if(Number>=Mean){
+        flag=true;
+        ObjAbove++;
+    }else{
+       flag=false;
+       Objbelow++;
+    }
+
+    Run++;
+    for(int i=1;i<N;i++)
+    {
+        bool flagTm;
+        fscanf(fp,"%d",&Number);
+        if(Number>=Mean){
+            flagTm=true;
+            ObjAbove++;
+        }else{
+           flagTm=false;
+           Objbelow++;
+        }
+        if(flag!=flagTm) Run++;
+        flag=flagTm;
+    }
+    fclose(fp);
+
+    pf("Observed Above Mean= %d\n",ObjAbove);
+    pf("Observed Below Mean= %d\n",Objbelow);
+    pf("Total Runs= %d\n",Run);
+
+    calMean=(double)( 2 * ObjAbove * Objbelow)/ (double) Number;
+    calMean+=.5;
+    CalVeri= (double) (2 * ObjAbove * Objbelow *( (2* ObjAbove *Objbelow) - Number));
+    CalVeri/=(double)(Number * Number *((2 * Number)-1));
+
+    Z0=((double)Run-calMean)/sqrt(CalVeri);
+    pf("The value Of Z0= %.4lf\n\n",Z0);
+    pf("\n Input The value Of Alpha=");
+    sf("%lf",&alpha);
+    pf("\n Input The Value Of Z (alpha/2)=");
+    sf("%lf",&Zalpha);
+    if((-Zalpha)<= Z0 && -Zalpha>=Z0)
+        pf("\n\n-------Test Passed----\n\n");
+    else pf("\n\n------Test Fail------\n\n");
+    return;
+}
+
 void PokerTEST(int Mod,int N)
 {
     pf("\n\n--------Pokers Test-----\n");
@@ -169,15 +243,15 @@ void PokerTEST(int Mod,int N)
     ChaiSqure+= (pow((double)(b-TwoSame),2)) / (double) b;
     ChaiSqure+= (pow((double)(c-AllSame),2)) / (double) c;
 
-    pf("\nObserved ChaiSqure Value=%.4lf\n",ChaiSqure);
+    pf("\nObserved ChaiSqure Value= %lf\n",ChaiSqure);
 
     pf("Enter Chai Table Value for DOF(2)\nmin=");
     sf("%lf",&GivenChai[0]);
     pf("max=");
     sf("%lf",&GivenChai[1]);
     if(GivenChai[0]<= ChaiSqure && GivenChai[1]>= ChaiSqure)
-         pf("TEST PASSED");
-    else pf("TEST FAIl");
+         pf("\n\n----TEST PASSED---\n\n");
+    else pf("\n\n---TEST FAIl--\n\n");
 
     return;
 }
@@ -192,15 +266,57 @@ int main()
     pf("Choose The Method For Random Number Generate.\n");
     pf("a.press 1 for LCM\n");
     pf("b.press 2 for Built In Rand Function\n");
-    int choise;
+    int choise,tm;
     sf("%d",&choise);
     if(choise==1)LCM(Mod,Number);
     else if(choise==2)DefaultRandom(Mod,Number);
     else pf("INVALID");
-
-    ChaiSqureTest(Mod,Number);
-    RunTEST(Mod,Number);
-    PokerTEST(Mod,Number);
+    system("cls");
+    while(true){
+        system("cls");
+        pf("\nChoose Test.\n\n");
+        pf("a.press 1 for Uniformity test\n");
+        pf("b.press 2 for Independence test\n");
+        sf("%d",&choise);
+        if(choise==1){
+                system("cls");
+            ChaiSqureTest(Mod,Number);
+            pf("\n\n\n ----Press 1 To Continue---\n");
+            sf("%d",&tm);
+        }
+        else if(choise==2){
+                system("cls");
+                pf("\n Choose Independence Test.\n\n");
+                pf("a.press 1 for Pokers test\n");
+                pf("b.press 2 for Run Up Down test\n");
+                pf("a.press 3 for Run Above Below test\n");
+                pf("b.press 4 for Run test\n");
+                sf("%d",&choise);
+                system("cls");
+                if(choise==1){
+                    PokerTEST(Mod,Number);
+                    pf("\n\n\n ----Press 1 To Continue---\n");
+                    sf("%d",&tm);
+                }else if(choise==2){
+                    RunUpDownTEST(Mod,Number);
+                    pf("\n\n\n ----Press 1 To Continue---\n");
+                    sf("%d",&tm);
+                }else if(choise==3){
+                    RunAboveBelowTEST(Mod,Number);
+                    pf("\n\n\n ----Press 1 To Continue---\n");
+                    sf("%d",&tm);
+                }else if(choise==4){
+                    RunTEST(Mod,Number);
+                    pf("\n\n\n ----Press 1 To Continue---\n");
+                    sf("%d",&tm);
+                }else{
+                    pf("\n\n------INVALID-----\n\n");
+                }
+        }
+        else{
+            pf("\n\n------INVALID-----\n\n");
+        }
+    }
 
     return 0;
 }
