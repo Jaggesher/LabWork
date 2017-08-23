@@ -1,17 +1,24 @@
-%I didn't get the problem properly. That's why I'm not sure about the
-%solution
-%%
-clear all;
-MSG1 = 'Enter the following data--> '
-m = input('mass(m): ');
-x1 = input('Initial position(x1): ');
-x2 = input('Velocity(x2): ');
-F = input('Given Force(F): ');
-k = input('Spring constant: ');
-c = input('Damping constant: ');
+function spring_dumping_system()  
+clear all; close all;  
 
-%Calculating acceleration
-Acceleration = -((k * x1) / m)-((c * x2) /m)+(F / m);
+time_span =0:0.001:10; %time in seconds.  
+k = 40; % spring stiffness. N/m 
+m = 5;  % mass, kg
+x0 = [0 0]; %initial_position & initial_speed
+P = 100;   % force amplitude 
+f=10;  %unit step 
+c=3.0; %damping coefficient 
+ 
+[t,x]=ode45(@myFunction,time_span,x0); 
+plot(t,x(:,1)); 
+ylim([-.1 .5]); 
+grid on;
 
-%Showing output
-Acceleration
+    % solves m x''+ c x' + k x = f(t) 
+    function xdot=myFunction(t,x) 
+        xdot_1 = x(2); 
+        xdot_2 = -(c/m)*x(2) - (k/m)*x(1) + f/m; 
+ 
+        xdot = [xdot_1 ; xdot_2]; 
+    end 
+end
