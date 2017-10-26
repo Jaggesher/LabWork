@@ -1,0 +1,13 @@
+1. Histogram Calculation
+2. Histogram Equalization
+3. Histogram Matching/Specification
+4. Log Transformation
+5. Gamma/Power Law Transformation
+6. Negative Transformation
+7. Thresholding to Generate Binary(B/W) Image
+8. Contrast Stretching
+9. Bit Plane Slicing
+10. Averaging/Box/Weighted Average Smoothing Linear Filter.
+11. Median/Max/Min Smooting Non Linear Filter.
+12. Laplacian Sharpning Filter.
+13. Sobel Sharpning Filter.
