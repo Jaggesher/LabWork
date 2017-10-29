@@ -1,3 +1,5 @@
+	Spatial Domain
+--------------------------------------------
 1. Histogram Calculation
 2. Histogram Equalization
 3. Histogram Matching/Specification
@@ -11,3 +13,15 @@
 11. Median/Max/Min Smooting Non Linear Filter.
 12. Laplacian Sharpning Filter.
 13. Sobel Sharpning Filter.
+
+	Frequency Domain
+---------------------------------------------
+14. Perform Fourier Transformation of a B/W Image (Square sized Black image with a square White Block in the Middle
+(Ref-Slide-7,Page-9)). Show Fourier Spectrum Image[ i)with log and with fft shift, ii)without log & with fft shift, 
+iii)with log & without fft shift, iv)without log & without fft shift ] 
+
+15. Take Standard Gray Scale Image(Lennaa), Mix Salt and Pepper Noise, Peform Frequency Domain Filtering using 
+Ideal Low Pass Filter(ILPF). Plot Cutoff Frequency Versus Peak SNR(psnr) of Original Image and Filtered Image.
+
+16. Take Standard Gray Scale Image(Lennaa), Mix Salt and Pepper Noise, Peform Frequency Domain Filtering using 
+Butterworth Low Pass Filter(BLPF). Plot Butterworth Filter Order Versus Peak SNR(psnr) of Original Image and Filtered Image.  
