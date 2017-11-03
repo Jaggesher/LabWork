@@ -26,4 +26,4 @@ Ideal Low Pass Filter(ILPF). Plot Cutoff Frequency Versus Peak SNR(psnr) of Orig
 16. Take Standard Gray Scale Image(Lennaa), Mix Salt and Pepper Noise, Peform Frequency Domain Filtering using 
 Butterworth Low Pass Filter(BLPF). Plot Butterworth Filter Order Versus Peak SNR(psnr) of Original Image and Filtered Image.  
 
-17. Gaussian Filter
+17. Ideal High and Low Pass Filter,Butterworth High and Low Pass Filter, Gaussian High and Low Pass Filter Design.
