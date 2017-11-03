@@ -19,7 +19,7 @@ hc = (ic-1)/2;
 [x, y] = meshgrid(-hc:hc, -hr:hr);
 for i=1:29
    
-    c =1./(1+((x.^2+y.^2)/D)^(2*i));
+    c =1./(1.+(((x.^2+y.^2).^0.5)./D).^(2*i));
   
     blpf= fft_shift_Img .* c;
     Re_Img= mat2gray(abs(ifft2(blpf)));
