@@ -11,7 +11,7 @@ fft_shift_Img= fftshift(fft_Img);
 
 ObservePSNR=zeros(1,29);
 
-D = 250; %Cut Off
+D = 25; %Cut Off
 
 [ir,ic] = size(Noise_Img); 
 hr = (ir-1)/2; 
