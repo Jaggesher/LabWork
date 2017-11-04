@@ -13,7 +13,7 @@ fft_shift_Img= fftshift(fft_Img);
 [ir,ic] = size(Img); 
 hr = (ir-1)/2; 
 hc = (ic-1)/2; 
-D=25; %Cut Off
+D=55; %Cut Off
 
 %Ideal Low Pass & High Pass
 [x, y] = meshgrid(-hc:hc, -hr:hr);
@@ -43,8 +43,8 @@ Re_Img_Bhpf= mat2gray(abs(ifft2(hpf)));
 %Gaussian Low Pass & High Pass
 
 [x, y] = meshgrid(-hc:hc, -hr:hr);
-Low = 1./(1.+(((x.^2+y.^2).^0.5)./D).^(2*n));
-High= 1./(1.+(D./(x.^2+y.^2).^0.5).^(2*n));
+Low = exp(-(x.^2+y.^2)/(2*D^2));
+High= 1.-Low;
 
 lpf= fft_shift_Img .* Low;
 Re_Img_Glpf= mat2gray(abs(ifft2(lpf)));
@@ -54,8 +54,8 @@ Re_Img_Ghpf= mat2gray(abs(ifft2(hpf)));
 
 
 %Ploting Area.
-row=3;
-col=2;
+row=2;
+col=4;
 subplot(row,col,1);
 imshow(Img);
 title('Original Image');
@@ -79,3 +79,13 @@ title('Butterworth Low Pass Filtered Image');
 subplot(row,col,6);
 imshow(Re_Img_Bhpf);
 title('Butterworth High Pass Filtered Image');
+
+subplot(row,col,7);
+imshow(Re_Img_Glpf);
+title('Gaussian Low Pass Filtered Image');
+
+subplot(row,col,8);
+imshow(Re_Img_Ghpf);
+title('Gaussian High Pass Filtered Image');
+
+
