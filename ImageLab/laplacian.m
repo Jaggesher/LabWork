@@ -1,6 +1,6 @@
 clc, clear, close all;
 
-Img=imread('cameraman.tif');
+Img=imread('laplacian.tif');
 
 %Img=imread('RakulPreet.jpg');
 %Img=rgb2gray(Img);
@@ -13,10 +13,12 @@ V_Image=zeros(size(Img));
 A=padarray(Img,[1,1]);
 A=double(A);
 
-for i=1:size(Img,1)
-    for j=1:size(Img,2)
-        H_Image(i,j)=0*A(i,j)-1*A(i,j+1)+0*A(i,j+2)-1*A(i+1,j)+4*A(i+1,j+1)-1*A(i+1,j+2)+0*A(i+2,j)-1*A(i+2,j+1)-0*A(i+2,j+2);
-        V_Image(i,j)=-1*A(i,j)-1*A(i,j+1)-1*A(i,j+2)-1*A(i+1,j)+8*A(i+1,j+1)-1*A(i+1,j+2)-1*A(i+2,j)-1*A(i+2,j+1)-1*A(i+2,j+2);
+[row,column]=size(A);
+
+for i=2:row-1
+    for j=2:column-1
+        H_Image(i-1,j-1)=0*A(i-1,j-1)-1*A(i-1,j)+0*A(i-1,j+1)-1*A(i,j-1)+4*A(i,j)-1*A(i,j+1)+0*A(i+1,j-1)-1*A(i+1,j)+0*A(i+1,j+1);
+        V_Image(i-1,j-1)=-1*A(i-1,j-1)-1*A(i-1,j)-1*A(i-1,j+1)-1*A(i,j-1)+8*A(i,j)-1*A(i,j+1)-1*A(i+1,j-1)-1*A(i+1,j)-1*A(i+1,j+1);
     end
 end
 H_Image=uint8(H_Image);
