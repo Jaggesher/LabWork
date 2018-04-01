@@ -29,21 +29,32 @@ string Decript(string data,int width)
 int main()
 {
     string value;
-    int pos;
+    int pos1,pos2;
     pf("Please Input given string: ");
     getline(cin,value);
-    pf("plese Input width: ");
-    sf("%d",&pos);
+    pf("plese Input width1: ");
+    sf("%d",&pos1);
+    pf("plese Input width2: ");
+    sf("%d",&pos2);
 
-    string EncrptedMsg= Encript(value,pos);
-    string DecriptedMsg = Decript(EncrptedMsg,pos);
+    string EncrptedMsg1= Encript(value,pos1);
+    string EncrptedMsg2= Encript(EncrptedMsg1,pos2);
+    string DecriptedMsg1 = Decript(EncrptedMsg2,pos2);
+    string DecriptedMsg2 = Decript(DecriptedMsg1,pos1);
 
     pf("\n\n---------------------------------------\n\n");
 
-    pf("Encripted Message: ");
-    cout << EncrptedMsg<<endl;
+    pf("Encripted Message1: ");
+    cout << EncrptedMsg1<<endl;
 
-    pf("Decripted Message: ");
-    cout << DecriptedMsg<<endl;
+    pf("Encripted Message2: ");
+    cout << EncrptedMsg2<<endl;
+
+
+    pf("Decripted Message1: ");
+    cout << DecriptedMsg1<<endl;
+
+    pf("Decripted Message2: ");
+    cout << DecriptedMsg2<<endl;
     return 0;
 }
