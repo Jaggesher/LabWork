@@ -61,8 +61,10 @@ string Decript(string data)
     return value;
 }
 
-int main()
+void ConsoleInput()
 {
+
+
     string value;
     int pos;
 
@@ -81,10 +83,34 @@ int main()
 
     pf("\n\n---------------------------------------\n\n");
 
-    pf("Encripted Message: ");
+    pf("Encrypted Message: ");
     cout << EncrptedMsg<<endl;
 
-    pf("Decripted Message: ");
+    pf("Decrypted Message: ");
     cout << DecriptedMsg<<endl;
+}
+
+void FileInput()
+{
+    ifstream inputFile ("oneTimePadInput.txt");
+    ofstream outputFile ("oneTimePadOutput.txt");
+    string value;
+    getline(inputFile,KeySeq);
+    getline(inputFile,value);
+
+    string EncrptedMsg= Encript(value);
+    string DecriptedMsg = Decript(EncrptedMsg);
+
+    outputFile << "Encrypted Message: "<<EncrptedMsg<<endl;
+    outputFile << "Decrypted Message: "<<DecriptedMsg<<endl;
+    cout<<"Success"<<endl;
+
+}
+int main()
+{
+   // ConsoleInput();
+
+    FileInput();
+
     return 0;
 }
