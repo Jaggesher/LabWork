@@ -2,6 +2,7 @@
 #define pf printf
 #define sf scanf
 using namespace std;
+
 string KeySeq;
 int giveActualIndex(char ch)
 {
@@ -108,9 +109,9 @@ void FileInput()
 }
 int main()
 {
-   // ConsoleInput();
+    ConsoleInput();
 
-    FileInput();
+    //FileInput();
 
     return 0;
 }
