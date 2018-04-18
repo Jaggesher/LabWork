@@ -57,6 +57,8 @@ int main()
         MakeDictionary();
         Compress();
         pf("\nSuccess :) \n\n");
+        inputFile.close();
+        outputFile.close();
     }else{
         pf("Can't find the input File.");
     }
